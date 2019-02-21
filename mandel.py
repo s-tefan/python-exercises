@@ -1,4 +1,4 @@
-from graphics import *
+#from graphics import *
 import math
 import cmath
 import random
