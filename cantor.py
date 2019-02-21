@@ -22,7 +22,7 @@ def cantor(x,nmax=10):
 
 def graphics_zelle(l):
   import graphics
-  sc=1000
+  sc=600
   win=graphics.GraphWin("Cantorkurva",sc,sc)
   win.setCoords(0,0,1,1)
   pl=[]
