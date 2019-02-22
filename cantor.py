@@ -29,9 +29,7 @@ def graphics_zelle(l):
   for p in l:
     pl.append(graphics.Point(p[0],p[1]))
   poly=graphics.Polygon(pl)
-  poly.setFill('white')
   poly.draw(win)
-  return win
 
 
 def plotcantor(nmax):
@@ -44,37 +42,3 @@ def plotcantor(nmax):
         xyl.append((x,cantor(x,nmax)))
     graphics_zelle(xyl)
         
-def cantorlist(n):
-    clist=[]
-    for k in range(2**n):
-        fs='{:0'+str(n)+'b}'
-        s=fs.format(k) # binary repr. of k with n bits
-        t1=0
-        t2=0
-        b=0
-        flag=False # this flag is False when there are just zeros trailing after the current bit
-        for bit in s[::-1]: # traverse s backwords (lsb first)
-            if flag:
-                if bit=='1':
-                    t1=t1+2
-                    t2=t2+2
-                    b=b+1
-            else:
-                if bit=='1':
-                    t1=1
-                    t2=2
-                    b=b+1
-                    flag=True
-            t1=t1/3
-            t2=t2/3
-            b=b/2
-        if k:
-            clist.append((t1,b))
-        clist.append((t2,b))
-    clist.append((1.0,1.0))
-    return clist
-
-cl=cantorlist(10)
-print(cl)
-graphics_zelle(cl+[(1.0,0.0)])
-input('---')
