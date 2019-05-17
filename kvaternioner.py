@@ -5,7 +5,14 @@ class Kvaternion:
     def __init__(self, r=0,i=0,j=0,k=0):
         self.coeffs = [r,i,j,k]  
 
+    @classmethod
+    def rv(cls,r,v):
+        return cls(r=r,i=v[0],j=v[1],k=v[2])
 
+    @classmethod
+    def rot(cls,v,th):
+        return cls(r=math.cos(th),i=math.cos(th)*v[0],j=math.cos(th)*v[1],k=math.cos(th)*v[2])
+        
 
     def real_part(self):
         return self.coeffs[0]
@@ -109,6 +116,10 @@ class Kvaternion:
             q.coeffs[i]=-q.coeffs[i]
         return q
 
+    @classmethod
+    def conj(cls,q):
+        return cls(q.coeffs[0],-q.coeffs[1],-q.coeffs[2],-q.coeffs[3])
+
     def modulus_sq(self):
         return sum([x**2 for x in self.coeffs[0:4]])
 
@@ -126,7 +137,8 @@ class Kvaternion:
     def __repr__(self):
         return repr(self.coeffs[0])+'+'+repr(self.coeffs[1])+'i+' \
                       +repr(self.coeffs[2])+'j+'+repr(self.coeffs[3])+'k'
-        
+
+
         
         
 
