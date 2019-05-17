@@ -51,6 +51,26 @@ class MyMatrix:
             s.set(k,k,d[k])
         return s
 
+    def concat_rowwise(self,*matrices):
+        ss=self.size()
+        for matrix in matrices:
+            sm=matrix.size()
+            if sm[0]!=ss[0]:
+                raise TypeError("Mismatching number of rows")
+            else:
+                for r in range(ss[0]):
+                    self.array[r]+=matrix.array[r]
+
+    def concat_colwise(self,*matrices):
+        ss=self.size()
+        for matrix in matrices:
+            sm=matrix.size()
+            if sm[1]!=ss[1]:
+                raise TypeError("Mismatching number of columns")
+            else:
+                for r in range(ss[0]):
+                    self.array+=matrix.array
+    
         
     def __add__(self,b):
         if not self.size()==b.size():
@@ -73,6 +93,27 @@ class MyMatrix:
                     for k in range(az[1]):
                         m.array[i][j]+=a.array[i][k]*b.array[k][j]
         return m
+
+    def __pow__(self,n):
+        ss=self.size()
+        sr=ss[0]
+        if n<0:
+            raise Exception("Negative powers not implemented")
+        else:
+            p=MyMatrix.eyeMatrix(sr)
+            sq=self.cp()
+            while n!=0:
+                print(n)
+                if n%2!=0:
+                    print("...1")
+                    p*=sq
+                else: print("...0")
+                n=n//2
+                if n: sq*=sq
+            return p
+                    
+            
+
 
     def transpose(self):
         sz=self.size()
