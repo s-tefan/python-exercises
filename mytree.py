@@ -4,7 +4,7 @@ class MyTree:
 
     def __init__(self,value=None,branches=[]):
         self.value=value
-        self.branches=branches
+        self.branches=branches #App, app, kommer inte att funka!
 
     def setValue(self,val):
         self.value=val
