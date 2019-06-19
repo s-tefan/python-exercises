@@ -6,20 +6,24 @@ Created on Tue Jun 18 13:07:19 2019
 """
 
 from graphics import *
-import time
+#import time
 from datetime import datetime
 
 def pointcnum(z,origin=Point(60,60),radius=50):
+    # returns a point from a complex number
+    # real axis points north, imaginary axis east from origin
     return Point((origin.getX()+radius*z.imag),(origin.getX()-radius*z.real))
     
 
-def drawface(wi):
+def drawface(wi,origin=Point(60,60),radius=50):
+    # draws a clockface in GraphWin wi
     w=(-1)**(1/6)
     for k in range(12):
-        pt=pointcnum(w**k)
+        pt=pointcnum(w**k,origin=Point(60,60),radius=50)
         pt.draw(wi)
 
 def stopwatch():
+    # displays a stopwatch (without stop)
     w=(-1)**(1/30)
     z=1
     win=GraphWin('',120,120)
@@ -37,6 +41,7 @@ def stopwatch():
     win.close()
         
 def clock():
+    # displays an analog/digital clock
     orig=Point(60,60)
     sechandlelength=50
     minhandlelength=50
