@@ -18,11 +18,27 @@ label = pyglet.text.Label('Hello, world',
                           x=win.width//2, y=win.height//2,
                           anchor_x='center', anchor_y='center')
 
+
+def unitstrip(colorlist,side_length=1):
+        vlist = []
+        clist = []
+        for k in range(len(colorlist)):
+                vlist += [k*side_length,0,k*side_length,side_length]
+                clist += (colorlist[k] + colorlist[k])
+        return pyglet.graphics.vertex_list(
+                        2*len(colorlist),\
+                        ('v2f',vlist), \
+                        ('c3B',clist) \
+                )
+
+
+
 @win.event
 def on_draw():
         win.clear()
         label.draw()
         square.draw(pyglet.gl.GL_POLYGON)
+        remsa.draw(pyglet.gl.GL_QUAD_STRIP)
 
 @win.event
 def on_mouse_drag(x, y, dx, dy, buttons, modifiers):
@@ -42,7 +58,7 @@ def move_it(dt):
                 square.vertices[2*k+1] += c * math.cos(d*g_tick)
 
 pyglet.clock.schedule_interval(move_it, 1/60)
-
+remsa = unitstrip([(255,0,0),(188,188,0),(0,255,0),(0,188,188),(0,0,255)],30)
 
  
 pyglet.app.run()
