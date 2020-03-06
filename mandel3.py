@@ -27,7 +27,7 @@ xmin, xmax, ymin, ymax = -2,0.5,0,1
 #xmin, xmax, ymin, ymax = -1.75,-1.7,0,0.02
 cstart = xmin + ymin*1j
 cstop = xmax + ymax*1j
-delta = (xmax-xmin)/200*(1+1j)
+delta = (xmax-xmin)/400*(1+1j)
 nmax = 100
 win = graphingwin(xmin,xmax,ymin,ymax,xres=800,yres=800,equal=True)
 r = abs(delta)/2
@@ -54,7 +54,7 @@ while True:
             z = z**2 + c
             cdict[c][0] = z
             cdict[c][1]+=1
-        if n%20 == 0:
+        if n%40 == 0:
             intens = int(255/(1 + cdict[c][1]/20))
             col = graphics.color_rgb(intens,intens,intens)
             cdict[c][2].setFill(col)
