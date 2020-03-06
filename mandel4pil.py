@@ -32,7 +32,7 @@ class Mandelbild:
             p = self.rundict[coords]
             p.iterate()
             if p.runaway:
-                self.rundict.pop(coords, False)
+                self.rundict.pop(coords)
 
 
 test = Mandelbild(-3+0j, 1+2j, 0.5)
