@@ -1,4 +1,4 @@
-#import PIL.ImageDraw 
+import PIL.Image
 
 class Mandelpunkt:
     def __init__(self, c):
@@ -15,29 +15,35 @@ class Mandelpunkt:
 
 class Mandelbild:
     def __init__(self,cstart, cstop, delta):
-        self.mandeldict = {}
+        self.cstart = cstart
+        self.cstop = cstop
+        self.delta = delta
         self.rundict = {}
-        width = int(((cstop-cstart)/delta).real)
-        height = int(((cstop-cstart)/delta).imag)
-        for m in range(height):
-            for n in range(width):
-                c = cstart + n*delta.real + m*delta.imag*1j
+        self.width = int(((cstop-cstart)/delta).real)
+        self.height = int(((cstop-cstart)/delta).imag)
+        for m in range(self.height):
+            for n in range(self.width):
+                c = cstart + n*delta + (self.height-m)*delta*1j
                 p = Mandelpunkt(c)
-                self.mandeldict[(m,n)] = p 
+                self.rundict[(m,n)] = p 
                 if not(p.runaway):
                     self.rundict[(m,n)] = p
     
     def iterate(self):
         for coords in self.rundict:
             p = self.rundict[coords]
-            p.iterate()
-            if p.runaway:
-                self.rundict.pop(coords)
+            if not(p.runaway):
+                p.iterate()
 
 
-test = Mandelbild(-3+0j, 1+2j, 0.5)
-for k in range(30):
+test = Mandelbild(-1.2+0.175j, -1.175+0.2j, 2e-5)
+for k in range(255):
     test.iterate()
 
-for co in test.mandeldict:
-    print(test.mandeldict[co].c, test.mandeldict[co].iters)
+imlist = []
+for co in test.rundict:
+    print(test.rundict[co].c, test.rundict[co].iters)
+    imlist.append(test.rundict[co].iters)
+
+im = PIL.Image.frombytes('L',(test.width,test.height),bytes(imlist))
+im.show()
