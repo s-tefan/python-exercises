@@ -1,4 +1,5 @@
 import PIL.Image
+import math
 
 class Mandelpunkt:
     def __init__(self, c):
@@ -36,14 +37,42 @@ class Mandelbild:
                 p.iterate()
 
 
-test = Mandelbild(-1.2+0.175j, -1.175+0.2j, 2e-5)
-for k in range(255):
-    test.iterate()
+def palette1():
+    pal = []
+    for k in range(256):
+        rg = (255-k)//2
+        rg *= (rg<128)
+        b = (255-k)*2-255
+        b *= (b>=0)
+        pal += [rg,rg,b]
+    return pal
 
-imlist = []
-for co in test.rundict:
-    print(test.rundict[co].c, test.rundict[co].iters)
-    imlist.append(test.rundict[co].iters)
+def palette2():
+    pal = []
+    for k in range(256):
+        if k == 255 : 
+            pal += [0,0,0]
+        else :
+            r = (255-k//2)
+            g = (255-k)
+            b = 255-k
+            pal += [r,g,b]
+    return pal
 
-im = PIL.Image.frombytes('L',(test.width,test.height),bytes(imlist))
-im.show()
+def test():
+    test = Mandelbild(-1.19+0.175j, -1.18+0.185j, 1e-5)
+    for k in range(255):
+        print(k)
+        test.iterate()
+
+    imlist = []
+    for co in test.rundict:
+        #print(test.rundict[co].c, test.rundict[co].iters)
+        imlist.append(test.rundict[co].iters)
+    return test,imlist
+
+def showim(test, imlist):
+    im = PIL.Image.frombytes('L',(test.width,test.height),bytes(imlist))
+    im.putpalette(palette2())
+    im.show()
+    return im
