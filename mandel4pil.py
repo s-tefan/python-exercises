@@ -1,6 +1,74 @@
 import PIL.Image
 import math
 
+
+
+def palette1():
+    pal = []
+    for k in range(256):
+        rg = (255-k)//2
+        rg *= (rg<128)
+        b = (255-k)*2-255
+        b *= (b>=0)
+        pal += [rg,rg,b]
+    return pal
+
+def palette2():
+    pal = []
+    for k in range(256):
+        if k == 255 : 
+            pal += [0,0,0]
+        else :
+            r = (255-k//2)
+            g = (255-k)
+            b = 255-k
+            pal += [r,g,b]
+    return pal
+
+def palette_binary():
+    pal = []
+    for k in range(256):
+        if k%2 : 
+            pal += [0,0,0]
+        else :
+            pal += [255,255,255]
+    return pal
+
+def palette_trinary():
+    pal = []
+    for k in range(255):
+        if k%2 : 
+            pal += [255,0,0]
+        else :
+            pal += [255,255,255]
+    pal += [0,0,0]
+    return pal
+
+def palette_br():
+    pal = []
+    for k in range(255):
+        pal += [k, 0, 255-k]
+    pal += [0,0,0]
+    return pal
+
+def palette_bm():
+    pal = []
+    for k in range(51): # B -> C
+        pal += [0, 5*k, 255]
+    for k in range(51): # C -> G 
+        pal += [0, 255, 255-5*k]
+    for k in range(51): # G -> Y 
+        pal += [5*k, 255, 0]
+    for k in range(51): # Y -> R 
+        pal += [255, 255-5*k, 0]
+    for k in range(51): # R -> M 
+        pal += [255, 0, 5*k]
+    pal += [0,0,0]
+    return pal
+
+
+
+
 class Mandelpunkt:
     def __init__(self, c):
         self.c = c
@@ -86,6 +154,7 @@ class Mandelbild:
         im = PIL.Image.frombytes('L',(self.width,self.height),bytes(imlist))
         return im
 
+    # generate an image and save it, return image
     def save_image( self, 
                     name = None, 
                     path = '', 
@@ -94,63 +163,24 @@ class Mandelbild:
                     ) :
         if name==None:
             name = path + \
-                'mandel_{cm}_{cw}_{i}_{w}.png'.format(
+                'mandel_{cm}_{cw}_{i}_{w}_{s}.png'.format(
                 cm = self.cmid,
                 cw = self.cwidth,
                 i = self.iters,
-                w = self.width )
+                w = self.width,
+                s = suffix 
+                )
         im = self.make_image()
         im.putpalette(palette)
         im.save(name)
         return im
 
-    def show_image(self):
+    def show_image(self, palette = palette_trinary()):
         im = self.make_image()
-        im.putpalette(palette2())
+        im.putpalette(palette)
         im.show()
         return im
 
-
-def palette1():
-    pal = []
-    for k in range(256):
-        rg = (255-k)//2
-        rg *= (rg<128)
-        b = (255-k)*2-255
-        b *= (b>=0)
-        pal += [rg,rg,b]
-    return pal
-
-def palette2():
-    pal = []
-    for k in range(256):
-        if k == 255 : 
-            pal += [0,0,0]
-        else :
-            r = (255-k//2)
-            g = (255-k)
-            b = 255-k
-            pal += [r,g,b]
-    return pal
-
-def palette_binary():
-    pal = []
-    for k in range(256):
-        if k%2 : 
-            pal += [0,0,0]
-        else :
-            pal += [255,255,255]
-    return pal
-
-def palette_trinary():
-    pal = []
-    for k in range(255):
-        if k%2 : 
-            pal += [255,0,0]
-        else :
-            pal += [255,255,255]
-    pal += [0,0,0]
-    return pal
 
 
 def test():
