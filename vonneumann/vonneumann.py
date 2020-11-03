@@ -13,17 +13,22 @@ class NumberByFunction:
 
     # Behöver fixas på
 
-    s = lambda n : Null
-    zero = lambda n : n
+    s = lambda n : n
+    zero = Null
 
-    def __init__(self, repr=zero):
-        self.repr = repr
+
+    def __init__(self):
+        self.repr = self.zero # makes a zero
 
     def succ(self):
-        return NumberByFunction(lambda n : s(repr(n)))
+        return s(self.repr)
+        
 
     def count(self):
-        pass
+        if self.repr == self.zero:
+            return 0
+        else:
+            return self.repr.count
 
 
 apa = NumberByFunction()
