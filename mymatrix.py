@@ -1,6 +1,9 @@
+verbose = False
+
+
 class MyMatrix:
 
-
+    
     def __init__(self,array):
         self.array=array
 
@@ -26,15 +29,32 @@ class MyMatrix:
         array=[]
         for k in range(m):
             array.append(n*[0])
-        return(MyMatrix(array))
+        return MyMatrix(array)
+
+    def empty_column(j):
+        array=[[]]*j
+        return MyMatrix(array)
+
 
     def set(self,i,j,c):
         self.array[i][j]=c
 
+    def get(self,i,j):
+        return self.array[i][j]
+
+    def get_block(self, rslice, cslice):
+        rows = self.array[rslice] # make a slice of rows (copy)
+        for i in range(len(rows)):
+            rows[i] = rows[i][cslice]
+        return MyMatrix(rows)
+
     def size(self):
         m=len(self.array)
-        n=len(self.array[0])
-        return [m,n]
+        if m == 0:
+            return (0,0)
+        else:
+            n=len(self.array[0])
+            return (m,n)
 
     @staticmethod
     def eyeMatrix(n):
@@ -51,7 +71,7 @@ class MyMatrix:
             s.set(k,k,d[k])
         return s
 
-    def concat_rowwise(self,*matrices):
+    def concat_rowwise_multi(self,*matrices):
         ss=self.size()
         for matrix in matrices:
             sm=matrix.size()
@@ -60,17 +80,63 @@ class MyMatrix:
             else:
                 for r in range(ss[0]):
                     self.array[r]+=matrix.array[r]
+        return self
 
-    def concat_colwise(self,*matrices):
+    def concat_colwise_multi(self,*matrices):
         ss=self.size()
         for matrix in matrices:
             sm=matrix.size()
             if sm[1]!=ss[1]:
                 raise TypeError("Mismatching number of columns")
             else:
-                for r in range(ss[0]):
-                    self.array+=matrix.array
-    
+                self.array+=matrix.array
+        return self
+
+
+
+    def concat_rowwise_inplace(self, matrix):
+        ss=self.size()
+        sm=matrix.size()
+        if sm[0]!=ss[0]:
+            raise TypeError("Mismatching number of rows")
+        else:
+            for r in range(ss[0]):
+                self.array[r]+=matrix.array[r]
+        return self
+
+    def concat_colwise_inplace(self, matrix):
+        ss=self.size()
+        sm=matrix.size()
+        if sm[1]!=ss[1]:
+            raise TypeError("Mismatching number of columns")
+        else:
+            self.array+=matrix.array
+        return self
+
+
+    @staticmethod
+    def concat_rowwise(matrix1, matrix2):
+        s1=matrix1.size()
+        s2=matrix2.size()
+        if s1[0]!=s2[0]:
+            raise TypeError("Mismatching number of rows")
+        else:
+            cmatrix = matrix1.cp()
+            for r in range(s1[0]):
+                cmatrix.array[r]+=matrix2.array[r]
+            return cmatrix
+
+    @staticmethod
+    def concat_colwise(matrix1, matrix2):
+        s1=matrix1.size()
+        s2=matrix2.size()
+        if s1[1]!=s2[1]:
+            raise TypeError("Mismatching number of columns")
+        else:
+            cmatrix = matrix1.cp()
+            cmatrix.array+=matrix2.array
+            return cmatrix
+                
         
     def __add__(self,b):
         if not self.size()==b.size():
@@ -81,6 +147,18 @@ class MyMatrix:
                 for j in range(len(self.array[i])):
                     m.array[i][j]+=b.array[i][j]
         return(m)
+
+    def add_zip(self,b):
+        if not self.size()==b.size():
+            raise TypeError
+        else:
+            z = zip(self.array, b.array) # pair rows of each matrix
+            # now sum these rows
+            sum_rows = lambda radpar: list(map(sum,zip(*radpar)))
+            sum_array = map(sum_rows ,z)
+        return(MyMatrix(list(sum_array)))
+
+
 
     def __mul__(a,b):
         az=a.size(); bz=b.size()
@@ -152,5 +230,105 @@ class MyMatrix:
 
 
 
+    def swap_rows_inplace(self, i, j):
+        # swaps rows i and j of the matrix self
+        # first element has index 0
+        ri = self.array[i]
+        self.array[i] = self.array[j]
+        self.array[j] = ri
+    
+    def add_row_multiple_inplace(self, k, i, j):
+        # adds k*row i to row j
+        # first element has index 0
+        ri = self.array[i]
+        rj = self.array[j]
+        rnew = list(map(lambda ap: k*ap[0]+ap[1], zip(ri,rj)))
+        self.array[j] = rnew
 
+    def pivoting_inplace(self):
+        for i in range(1,len(self.array)):
+            if abs(self.get(i,0))>abs(self.get(0,0)):
+                self.swap_rows_inplace(0,i)
+
+    def gauss_first_inplace(self):
+        if len(self.array) <= 1:
+            return self.get(0,0)!=0 # return as below if one row
+        if not self.array[0]:
+            raise IndexError("No columns") # raise error if no columns
+        self.pivoting_inplace()
+        if self.get(0,0)==0:
+            return False # return False if first column is all zero 
+        for i in range(1,len(self.array)):
+            k = self.get(i,0)/self.get(0,0)
+            if k!=0:
+                self.add_row_multiple_inplace(-k,0,i)
+        return True # return True if first column is pivotal (non-zero)
+
+    def gauss_recursive(self):
+        # Inte helt färdig...
+        pass
+        block = self.cp()
+        if verbose: print("Ny vända")
+        if verbose: print(block.array)
+        
+        if block.size()[0] <= 1:
+            return block # One row matrix is fully reduced
+        if block.size()[1] <= 1:
+            return block
+        
+        zerocolblock=MyMatrix.empty_column(block.size()[0])
+        if verbose: print('empty zerocolblock:',zerocolblock.array)
+        
+        while not block.gauss_first_inplace():
+            # run if the first column is not a pivot column,
+            # i e it all zero
+            #print('No pivot')
+            if verbose: print(block.array)
+            # Split zero column + rest 'block'
+            ###zerocolblock.concat_rowwise_inplace(block.get_block(slice(None), slice(0,1)))
+            s = zerocolblock.size()
+            zerocolblock = MyMatrix.zeroMatrix(s[0],s[1]+1)
+            if verbose: print('zero column added to zerocolblock:', zerocolblock.array)
+            block = block.get_block(slice(None), slice(1,None))
+            if block.size()[1] == 0:
+                if verbose: print('Over and out')
+                #break
+
+        if verbose: print('Pivot')
+        #print(block.array)
+
+        firstrow = block.get_block(slice(0,1),slice(0,None))
+        zerocol = block.get_block(slice(1,None),slice(0,1))
+        block = block.get_block(slice(1,None),slice(1,None)) 
+
+        reduced_matrix = \
+            MyMatrix.concat_rowwise(
+                zerocolblock, 
+                MyMatrix.concat_colwise(
+                    firstrow, 
+                    MyMatrix.concat_rowwise(zerocol, block.gauss_recursive()
+                    )
+                )
+            )
+
+
+        
+        
+        if verbose: 
+            print("firstrow")
+            firstrow.print() 
+            
+            print("zerocolblock")
+            zerocolblock.print()
+
+            print("block")
+            block.print() 
+            
+
+            print('Rajtan!')
+            print(reduced_matrix)
+        return(reduced_matrix)
+
+    
+        
 
