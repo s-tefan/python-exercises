@@ -15,21 +15,28 @@ class Contfrac:
 
 
     @staticmethod
-    def from_number(x, n):
+    def from_float(x):
         termlist = []
-        for k in range(n):
+        while x:
             termlist.append(int(x))
-            if x % 1 == 0:
-                break
-            else:
-                x = 1/(x % 1)
+            r = x % 1
+            x = 1/r if r else 0
+        return Contfrac(termlist)
+
+    @staticmethod
+    def from_fraction(num, denom):
+        termlist = []
+        while num and denom:
+            q, r = divmod(num, denom)
+            termlist.append(q)
+            num, denom = denom, r
         return Contfrac(termlist)
 
 
     def truncate(self, n):
         try:
-            if len(terms) < n:  # may raise exception
-                n = len(terms)
+            if len(self.terms) < n:  # may raise exception
+                n = len(self.terms)
             x = self.terms[n - 1] # may raise exception
             if x == 0:
                 x = 1
@@ -40,5 +47,7 @@ class Contfrac:
             for j in self.terms:
                 pass
 
-cf = Contfrac.from_number(3/4, 10)
+cf = Contfrac.from_float(17/23)
+print(cf.truncate(10), cf)
+cf = Contfrac.from_fraction(17, 23)
 print(cf.truncate(10), cf)
