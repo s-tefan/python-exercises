@@ -7,4 +7,3 @@ s=summa(4,5,True)
 print(s)
 s=summa(4,6)
 print(s)
-
