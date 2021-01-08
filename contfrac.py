@@ -103,17 +103,23 @@ class Contfrac:
 
     def convergent(self, n, fraction = False):
         ap=Moebius.identity()
-        for a in self.makeiter():
-            ap *= Moebius.cf(a)
+        for k, a in enumerate(self.makeiter()):
+            if k >= n:
+                break
+            else:
+                ap *= Moebius.cf(a)
             #print(ap.apply(INF, fraction = fraction))
         return ap.apply(INF, fraction = fraction)
 
     def convergent_list(self, n, fraction = False):
         clist = []
         ap=Moebius.identity()
-        for a in self.makeiter():
-            ap *= Moebius.cf(a)
-            clist.append(ap.apply(INF, fraction = fraction))
+        for k, a in enumerate(self.makeiter()):
+            if k >= n:
+                break
+            else:
+                ap *= Moebius.cf(a)
+                clist.append(ap.apply(INF, fraction = fraction))
         return clist
 
 cf=Contfrac.from_float(17/23)
@@ -122,3 +128,12 @@ cf=Contfrac.from_fraction(17, 23)
 print(cf.convergent(10), cf.convergent(10, fraction = True), cf)
 
 print(cf.convergent_list(20, fraction = True))
+
+def ones():
+    while True:
+        yield 1
+
+cf = Contfrac(ones())
+n = 5
+print(cf.convergent(n), cf.convergent(n, fraction = True), cf)
+print(cf.convergent_list(n, fraction = True), cf)
