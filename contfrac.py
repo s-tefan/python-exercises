@@ -122,6 +122,17 @@ class Contfrac:
                 clist.append(ap.apply(INF, fraction = fraction))
         return clist
 
+    def convergent_gen(self, n = None, fraction = False):
+        clist = []
+        ap=Moebius.identity()
+        for k, a in enumerate(self.makeiter()):
+            if n and k >= n:
+                break
+            else:
+                ap *= Moebius.cf(a)
+                yield ap.apply(INF, fraction = fraction)
+
+
 cf=Contfrac.from_float(17/23)
 print(cf.convergent(10), cf.convergent(10, fraction = True), cf)
 cf=Contfrac.from_fraction(17, 23)
@@ -137,3 +148,21 @@ cf = Contfrac(ones())
 n = 5
 print(cf.convergent(n), cf.convergent(n, fraction = True), cf)
 print(cf.convergent_list(n, fraction = True), cf)
+
+
+def expcoeffs():
+    yield 2
+    k = 2
+    while True:
+        yield 1
+        yield k
+        k += 2
+        yield 1
+
+
+n = 20
+print(Contfrac(expcoeffs()).convergent_list(n, fraction = True))
+print(Contfrac(expcoeffs()).convergent_list(n, fraction = False))
+n = 30
+for k in Contfrac(expcoeffs()).convergent_list(n, fraction = False):
+    print(k)
