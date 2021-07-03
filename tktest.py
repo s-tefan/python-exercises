@@ -46,7 +46,7 @@ class Application(tk.Frame):
 #        myline=self.canv.create_line(x1,y1,x2,y2)
         myline=self.drawgraph(self.canv,xlist,ylist)
 
-            
+
     def drawgraph(self,canvas,xcoordlist,ycoordlist):
         l=[]
         for k in range(len(xcoordlist)):
@@ -68,7 +68,7 @@ class Application(tk.Frame):
         self.plot(self.fentry.get())
     def eret(self,event):
         self.plotentry()
-        
+
 root = tk.Tk()
 app = Application(master=root)
 
