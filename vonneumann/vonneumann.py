@@ -11,6 +11,9 @@ class NumberByList:
     def dec(self):
         self.repr = self.repr[:-1]
 
+    def count(self):
+        return len(self.repr)
+
 class NumberByReference:
 
     # Behöver fixas på
@@ -29,11 +32,23 @@ class NumberByReference:
             return self.pre.count()
 
 
-apa = NumberByReference()
-print(apa)
-apa = apa.succ()
-print(apa)
-apa = apa.succ()
-print(apa)
-
-apa
+#apa = NumberByReference()
+apa = NumberByList()
+print(apa, apa.count())
+#apa = apa.succ()
+apa.inc()
+print(apa, apa.count())
+#apa = apa.succ()
+apa.inc()
+print(apa, apa.count())
+apa.dec()
+print(apa, apa.count())
+apa.inc()
+print(apa, apa.count())
+apa.dec()
+print(apa, apa.count())
+apa.dec()
+print(apa, apa.count())
+apa.dec()
+print(apa, apa.count())
+s
