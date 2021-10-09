@@ -60,7 +60,7 @@ class Heap2:
 
     @classmethod
     def heapsort(cls, li):
-        '''funkar inte riktigt'''
+        '''borde göras på ett effektivare sätt'''
         cls.heapify(li)
         for k in range(len(li)):
             lili = li[k:]
