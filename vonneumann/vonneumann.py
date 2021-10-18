@@ -8,33 +8,47 @@ class NumberByList:
     def inc(self):
         self.repr.append(self.repr)
 
+    def dec(self):
+        self.repr = self.repr[:-1]
 
-class NumberByFunction:
+    def count(self):
+        return len(self.repr)
+
+class NumberByReference:
 
     # Behöver fixas på
 
-    s = lambda n : n
-    zero = Null
-
-
     def __init__(self):
-        self.repr = self.zero # makes a zero
+        self.pre = None # makes a zero
 
     def succ(self):
-        return s(self.repr)
+        self.pre = self
         
 
     def count(self):
-        if self.repr == self.zero:
+        if self.pre == None:
             return 0
         else:
-            return self.repr.count
+            return self.pre.count()
 
 
-apa = NumberByFunction()
-print(apa)
-apa = apa.succ()
-print(apa)
-apa = apa.succ()
-print(apa)
-
+#apa = NumberByReference()
+apa = NumberByList()
+print(apa, apa.count())
+#apa = apa.succ()
+apa.inc()
+print(apa, apa.count())
+#apa = apa.succ()
+apa.inc()
+print(apa, apa.count())
+apa.dec()
+print(apa, apa.count())
+apa.inc()
+print(apa, apa.count())
+apa.dec()
+print(apa, apa.count())
+apa.dec()
+print(apa, apa.count())
+apa.dec()
+print(apa, apa.count())
+s

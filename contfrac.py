@@ -52,12 +52,35 @@ class Moebius:
     def cf(cls, a):
         return cls.adder(a)*cls.recip()
 
+    @classmethod
+    def cf2(cls, a):
+        return cls.recip()*cls.adder(a)
+
     def inverse(self):
         a = self.matrix
         d = a[0][0]*a[1][1] - a[0][1]*a[1][0]
         return Moebius(
             [[a[1][1]/d, -a[1][0]/d], [-a[0][1]/d, a[0][0]/d]]
         )
+
+class Gencontfrac:
+    def __init__(self, partnums, partdenoms):
+        self.partnums = partnums
+        self.partdenoms = partdenoms
+
+    def __repr__(self):
+         max=15
+        s="["
+        for k, c in enumerate(self.terms):
+            if k > max:
+                s += " ..."
+                break
+            else:
+                s += str(c) + " "
+        return s + "]"
+
+
+
 
 class Contfrac:
     def __init__(self, terms = None):
@@ -73,10 +96,6 @@ class Contfrac:
             else:
                 s += str(c) + " "
         return s + "]"
-
-
-
-
 
     def makeiter(self):
         return iter(self.terms)
@@ -140,14 +159,9 @@ print(cf.convergent(10), cf.convergent(10, fraction = True), cf)
 
 print(cf.convergent_list(20, fraction = True))
 
-def ones():
+def constant(a):
     while True:
-        yield 1
-
-cf = Contfrac(ones())
-n = 5
-print(cf.convergent(n), cf.convergent(n, fraction = True), cf)
-print(cf.convergent_list(n, fraction = True), cf)
+        yield a
 
 
 def expcoeffs():
@@ -159,10 +173,19 @@ def expcoeffs():
         k += 2
         yield 1
 
+cf = Contfrac(constant(1+1j))
+n = 20
+#print(cf.convergent(n), cf.convergent(n, fraction = True), cf)
+#print(cf.convergent_list(n, fraction = True), cf)
+print(list(cf.convergent_gen(n, fraction = False)))
+for k in cf.convergent_gen(n, fraction = True):
+    print(k)
 
+'''
 n = 20
 print(Contfrac(expcoeffs()).convergent_list(n, fraction = True))
 print(Contfrac(expcoeffs()).convergent_list(n, fraction = False))
 n = 30
 for k in Contfrac(expcoeffs()).convergent_list(n, fraction = False):
     print(k)
+'''
