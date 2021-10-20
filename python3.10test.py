@@ -16,7 +16,6 @@ def bepa():
                 print("{0} implies {1}".format(ap, bep))
             case [*ap, '>', bep]:
                 print("{0} implies {1}".format(ap, bep))
-            case [*ap, '>', *bep]:
-                print("{0} implies {1}".format(ap, bep))
+
 
 bepa()
