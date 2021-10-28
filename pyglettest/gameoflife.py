@@ -52,7 +52,8 @@ def printit(livingset):
 gol = GameOfLife(((0,0),(1,0),(2,0),(0,1),(1,2)))
 printit(gol.livingset)
 #print(gol.celldict)
-for k in range(1,8):
+for k in range(1,30):
     gol.generate()
     printit(gol.livingset)
+    input()
 #    print(gol.celldict)

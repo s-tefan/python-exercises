@@ -18,6 +18,8 @@ square = pyglet.graphics.vertex_list(4, \
         ('v2f',[0,100, 10,100, 10,110, 0,110]), \
         ('c3B',(255,0,0, 255,0,0, 255,0,0, 0,0,255)))
 
+#square2 = square.copy()
+
 label = pyglet.text.Label('Hello, world',
                           font_name='Times New Roman',
                           font_size=36,

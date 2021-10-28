@@ -24,8 +24,8 @@ def majorscale(key_freq):
             yield pyglet.media.synthesis.FM(
                 duration=0.5, 
                 carrier=k*key_freq, 
-                modulator = 0.1,
-                mod_index = 10,
+                modulator = 3*k*key_freq,
+                mod_index = 2,
                 envelope=adsr)
 
 player = pyglet.media.Player()
