@@ -53,7 +53,7 @@ def move_it(dt):
         g_tick += 1
         c = 1
         d = math.pi/180 # en grad i taget
-        for k in range(4):
+        for k in range(3):
                 square.vertices[2*k] += c * math.sin(d*g_tick)
                 square.vertices[2*k+1] += c * math.cos(d*g_tick)
 
