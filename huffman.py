@@ -1,3 +1,4 @@
+# Funkar inte
 class MyBinaryTree:
     rootcontent=None
     left=None
@@ -34,8 +35,8 @@ class MyBinaryTree:
 
 class MyHuffmanTree(MyBinaryTree):
             
-    def __init__(self):
-        super().__init__(('',0))
+    def __init__(self, left=None, right=None):
+        super().__init__(('',0), left, right)
         
     def binarydict(self,dict,b):
         if self.is_leaf():
@@ -69,6 +70,7 @@ class MyHuffmanTree(MyBinaryTree):
             else:
                 raise Exception('Not a bit')
         return s
+
     @classmethod
     def huffmantree(cls,s=''):
         if s:
@@ -86,18 +88,19 @@ class MyHuffmanTree(MyBinaryTree):
                 b=treelist.pop()
                 ac=a.rootcontent
                 bc=b.rootcontent
-                treelist.append(huffmantree((ac[0]+bc[0],ac[1]+bc[1]),left=a,right=b))
+                treelist.append(MyHuffmanTree((ac[0]+bc[0],ac[1]+bc[1]),left=a,right=b))
             t=treelist.pop()
         else:
             t=MyHuffmanTree()
         return t
 
-    def huffmanleaf(cls,t):
+    @classmethod
+    def huffmanleaf(cls, content):
         tree=cls()
         tree.rootcontent=content
         tree.left=None
         tree.right=None
-
+        return tree
 
 
 s='sffjahfhjgfjsdjgfjshasfkl'
