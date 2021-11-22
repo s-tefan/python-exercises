@@ -35,8 +35,8 @@ class MyBinaryTree:
 
 class MyHuffmanTree(MyBinaryTree):
             
-    def __init__(self, left=None, right=None):
-        super().__init__(('',0), left, right)
+    def __init__(self, content = ('',0), left=None, right=None):
+        super().__init__(content, left = left, right = right)
         
     def binarydict(self,dict,b):
         if self.is_leaf():
@@ -77,7 +77,7 @@ class MyHuffmanTree(MyBinaryTree):
             sdict={}
             for c in s:
                 if c in sdict:
-                    sdict[c]+=1
+                sdict[c]+=1
                 else:
                     sdict[c]=1
             slist=[(x,sdict[x]) for x in sdict]
@@ -108,7 +108,7 @@ print(s)
 ht=MyHuffmanTree.huffmantree(s)
 print(ht)
 bs=ht.encode(s)
-print(b)
+print(bs)
 r=ht.decode(bs)
 print(r)
 
