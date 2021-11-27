@@ -12,9 +12,9 @@ class MyBinaryTree:
     right=None
 
     def __init__(self,content,left=None,right=None):
-        self.rootcontent=content
-        self.left=left
-        self.right=right        
+        self.rootcontent = content
+        self.left = left
+        self.right = right        
     
     def addchildren(self,content,left,right):
         self.rootcontent=content
