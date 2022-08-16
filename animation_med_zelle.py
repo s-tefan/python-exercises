@@ -81,4 +81,25 @@ def main4():
             p.draw(win)
     wait(win)
 
+def main5():
+    def getr(start,stop,delta):
+        val = start
+        while val <= stop:
+            yield val
+            val += delta
+
+    rmin, rmax = 1, 4
+    delta = 1.0e-2
+    win = graphingwin(rmin, rmax, 0, 1)
+    x = 0.5
+    for r in getr(rmin, rmax, delta):
+        for k in range(40):
+            x = r*x*(1-x)
+        for k in range(64):
+            x = r*x*(1-x)
+            p = graphics.Point(r,x)
+            p.draw(win)
+    wait(win)
+
 main4()
+#main5()
