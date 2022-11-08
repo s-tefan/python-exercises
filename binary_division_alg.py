@@ -60,5 +60,4 @@ def binary_division(a,b):
 print(binary_division(115,48))
 
         
-        
     
