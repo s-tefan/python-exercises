@@ -6,7 +6,7 @@ scb.go_down('BE')
 scb.go_down('BE0001')
 scb.go_down('BE0001G')
 # För nodinformation:
-# scb.info()
+print(scb.info())
 scb.go_down('BE0001T06AR')
 # alternativt, kortare:
 # scb = SCB('sv','BE','BE0001','BE0001G','BE0001T06AR')
