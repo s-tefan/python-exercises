@@ -1,0 +1,101 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.7">
+  <diagram name="Sida-1" id="XH7XmHX1yXwsiR4R2JEQ">
+    <mxGraphModel dx="1426" dy="743" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-28" parent="1" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="530" width="330" x="170" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="filtrera(indata)&lt;div&gt;indata är en lista av dict&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="250" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-2" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="nått slutet av undata?" vertex="1">
+          <mxGeometry height="80" width="80" x="260" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-4" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="Lägg till a i att_spara&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;att_spara.add(a)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="410" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-5" parent="1" style="whiteSpace=wrap;html=1;" value="Låt a vara nästa objekt i indata" vertex="1">
+          <mxGeometry height="60" width="120" x="240" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-6" edge="1" parent="1" source="Tarw_F3xogw-4xoSk8IQ-1" style="endArrow=classic;html=1;rounded=0;exitX=0.45;exitY=0.983;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Tarw_F3xogw-4xoSk8IQ-13" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="260" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-8" edge="1" parent="1" source="Tarw_F3xogw-4xoSk8IQ-2" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Tarw_F3xogw-4xoSk8IQ-5" value="Nej&lt;div&gt;&lt;br&gt;&lt;/div&gt;">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-9" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" value="ska a sparas?&lt;div&gt;if spar_villkor(a):&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="100" x="250" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-10" edge="1" parent="1" source="Tarw_F3xogw-4xoSk8IQ-5" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="Tarw_F3xogw-4xoSk8IQ-9" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="100" y="430" as="sourcePoint" />
+            <mxPoint x="150" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-11" edge="1" parent="1" source="Tarw_F3xogw-4xoSk8IQ-9" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="Tarw_F3xogw-4xoSk8IQ-4" value="Ja">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-13" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="initiera en tom lista som ska bli utdata.&lt;div&gt;att_spara = []&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="240" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-14" edge="1" parent="1" source="Tarw_F3xogw-4xoSk8IQ-13" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Tarw_F3xogw-4xoSk8IQ-2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-15" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="285" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-16" edge="1" parent="1" source="Tarw_F3xogw-4xoSk8IQ-9" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Tarw_F3xogw-4xoSk8IQ-15" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="290" y="620" as="sourcePoint" />
+            <mxPoint x="250" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-17" connectable="0" parent="Tarw_F3xogw-4xoSk8IQ-16" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Nej" vertex="1">
+          <mxGeometry relative="1" x="-0.2071" y="2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-18" edge="1" parent="1" source="Tarw_F3xogw-4xoSk8IQ-4" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" target="Tarw_F3xogw-4xoSk8IQ-15" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-23" edge="1" parent="1" source="Tarw_F3xogw-4xoSk8IQ-15" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="300" y="750" />
+              <mxPoint x="190" y="750" />
+              <mxPoint x="190" y="260" />
+            </Array>
+            <mxPoint x="390" y="550" as="sourcePoint" />
+            <mxPoint x="300" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-24" edge="1" parent="1" source="Tarw_F3xogw-4xoSk8IQ-2" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="Tarw_F3xogw-4xoSk8IQ-25" value="Ja">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="550" as="sourcePoint" />
+            <mxPoint x="560" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Tarw_F3xogw-4xoSk8IQ-25" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="Returnera att_spara" vertex="1">
+          <mxGeometry height="60" width="100" x="540" y="300" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
